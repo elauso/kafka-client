@@ -1,0 +1,15 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+
+COPY config.ini ./
+
+COPY schema.avsc ./
+
+COPY requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY avro_producer.py ./
+
+CMD [ "python", "./avro_producer.py" ]
