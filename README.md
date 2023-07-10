@@ -1,10 +1,10 @@
 # Kafka Client
 
-API's criadas para fazer publicações no kafka, no formato json ou avro.
+API criada para publicar eventos no kafka no formato json ou avro.
 
-Foi criado um módulo para publicação em tópicos no formato json (producer.py), um módulo para publicar eventos no formato avro (avro_producer.py) e um módulo para carregar um consumidor que pode ser plugado no tópico (consumer.py).
+Foi criado um módulo publicação no formato json (producer.py), um módulo para publicar no formato avro (avro_producer.py) e um módulo consumidor para ser plugado no tópico (consumer.py).
 
-A aplicação está dockerizada. Seus módulos podem ser subidos separadamente, usando os scripties shell incluídos na raiz do projeto.
+A aplicação está conteinerizada. Seus módulos podem ser subidos separadamente, executando os scripts em shell que constam na raiz do projeto.
 
 ## Stack
 
@@ -23,21 +23,21 @@ A aplicação está dockerizada. Seus módulos podem ser subidos separadamente, 
 
 ## Instalação
 
-Necessário alterar o arquivo configure.ini com as configurações do broker e tópico que deseja publicar/consumir eventos.
+Necessário alterar o arquivo config.ini com as configurações do broker e tópico que deseja publicar/consumir os eventos.
 
 Caso deseje publicar eventos em um tópico avro, atualize o arquivo schema.avsc com o schema do tópico que deseja publicar.
 
 Para subir as dependências (kafka-broker, schema-registry, etc) execute o comando:
 
-```docker-compose up -d'```
+```docker-compose up -d```
 
-Para subida do producer-json, execute o script run-producer.sh.
+Para subida do producer json, execute o script run-producer.sh.
 
-Para subida do producer-avro, execute o script run-avro-producer.sh.
+Para subida do producer avro, execute o script run-avro-producer.sh.
 
 Para subida do consumer, execute o script run-consumer.sh.
 
-Os módulos producer.py e avro_producer.py usam a mesma porta exposta para chamada da api de publicação de eventos, por isso não devem ser subidas no mesmo momento, para não haver conflito de bind na porta 5000.
+Os módulos producer.py e avro_producer.py usam a mesma porta que é usada pela api, por isso não suba as duas no mesmo momento, para não haver conflito de bind na porta 5000.
 
 ## Execução
 
@@ -45,6 +45,6 @@ Para publicar os eventos, deverá ser chamado a api /produce, enviando o payload
 
 ```curl -X POST -H "Content-Type: application/json" http://localhost:5000/produce -d '{"test":"blah"}'```
 
-É possível enviar o payload usando o recurso de leitura de arquivo do curl. Assim você pode incluir o payload do evento no arquivo sample.json e executar o comando:
+É possível realizar as chamadas usando o recurso de envio do payload com o valor carregado de um arquivo. Assim você pode incluir o payload no arquivo sample.json e executar o comando:
 
 ```curl -X POST -H "Content-Type: application/json" http://localhost:5000/produce -d @sample.json```
