@@ -11,6 +11,7 @@ A aplicação está conteinerizada. Seus módulos podem ser subidos separadament
   Tecnologia           |  Versão       |
 -----------------------|---------------|
   python               | 3
+  pip                  | 1
   flask                | 2.3.2
   confluent-kafka      | 2.1.1
   confluent-kafka[avro]| 2.1.1
