@@ -29,7 +29,7 @@ def main():
             continue
         data = msg.value().decode('utf-8')
         logger.info('Consumed message: {}'.format(data))
-    c.close()
+    consumer.close()
 
 if __name__ == '__main__':
     main()
